@@ -95,7 +95,7 @@ Mode                 LastWriteTime         Length Name
 #documents/hello.txt 파일을 backup 폴더에 복사
 PS C:\Develops\quests\powershell_practice\documents> cp hello.txt C:\Develops\quests\powershell_practice\backup
 #images 폴더의 모든 파일을 backup 폴더에 복사
-
+PS C:\Develops\quests\powershell_practice> cp images backup
 #temp 폴더에 test.txt 파일을 생성
 PS C:\Develops\quests\powershell_practice> cd temp
 PS C:\Develops\quests\powershell_practice\temp> "" > test.txt
