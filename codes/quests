@@ -76,7 +76,9 @@ C:\Develops\quests\powershell_practice
 #documents 폴더에 hello.txt 파일 생성 후 "hello power shell!" 내용 입력하기
 PS C:\Develops\quests\powershell_practice> cd documents
 PS C:\Develops\quests\powershell_practice\documents> "Hello PowerShell!" > hello.txt
-
+#images 폴더에 빈 파일 생성
+PS C:\Develops\quests\powershell_practice> cd images
+PS C:\Develops\quests\powershell_practice\images> "" > images
 #hello.txt 파일의 내용을 출력
 PS C:\Develops\quests\powershell_practice\documents> cat hello.txt
 Hello PowerShell!
