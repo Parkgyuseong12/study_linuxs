@@ -366,7 +366,8 @@ total 0
 ### 8-3. 파일명이 `test` 또는 `file`로 시작하는 모든 파일 삭제 (주의: 실제로는 실행하지 말고 명령어만 작성)
 ```bash
 # 명령어를 작성하세요
-[parkgyuseong@localhost wildcard_practice]$ rm -r {test,file}.*
+[parkgyuseong@localhost wildcard_practice]$ rm -r {test,file}*.*
+
 ```
 
 ---
