@@ -79,7 +79,7 @@ nano data.txt
 
 ```
 nano sysinfo.sh
-ls -l sysinfo.sh
+ls -al sysinfo.sh
 ```
 ---
 
@@ -111,7 +111,7 @@ find server.conf && cat server.conf
 4. 상위 디렉토리로 복귀
 
 ```
-cd logs/ && touch access.log && ls && cd ./../
+cd logs/ && touch access.log && ls -al && cd ./../
 
 ```
 
