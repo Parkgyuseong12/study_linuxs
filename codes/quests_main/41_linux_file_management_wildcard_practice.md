@@ -374,6 +374,12 @@ backup2022  data2.csv   final_report.txt  log_error.txt      projectC        tem
 \# 4단계: log\_system.txt를 logs/system/로 이동
 
 \# 명령어들을 작성하세요:
+```
+[parkgyuseong@localhost wildcard_file_practice]$ cd logs/ && mkdir -p access system error && mv log_access.txt access/ && mv log_error.txt error/ && mv log_system.txt system/ && ls
+access  log01  log03  log05  log07  log09  log11  system
+error   log02  log04  log06  log08  log10  log12
+
+```
 
 ---
 
@@ -385,11 +391,29 @@ backup2022  data2.csv   final_report.txt  log_error.txt      projectC        tem
 
 \# 명령어를 작성하세요:
 
+```
+[parkgyuseong@localhost wildcard_file_practice]$ mkdir processed && cp report*.* processed/ && cp data*.* processed/ && ls
+access      backup2023  data_old.csv       images          projectA     scripts
+archives    backup2024  documents          license.txt     projectB     system
+backup      data        error              log_access.txt  projectC     temp
+backup2020  data1.csv   files              log_error.txt   report1.txt
+backup2021  data2.csv   final_report.txt   logs            report2.txt
+backup2022  data3.csv   final}_report.txt  processed       report3.txt
+[parkgyuseong@localhost wildcard_file_practice]$ cd processed/
+[parkgyuseong@localhost processed]$ ls
+data1.csv  data2.csv  data3.csv  data_old.csv  report1.txt  report2.txt  report3.txt
+[parkgyuseong@localhost processed]$ 
+
+```
+
 ### 6-2. 제외 패턴 활용
 
 \# 모든 파일 중에서 "final\_"로 시작하지 않는 .txt 파일들을 draft 디렉터리로 이동하세요
 
 \# 명령어를 작성하세요:
+```
+
+```
 
 ### 6-3. 범위 지정 패턴
 
