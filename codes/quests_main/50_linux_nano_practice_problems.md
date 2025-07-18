@@ -79,7 +79,25 @@ nano data.txt
 
 ```
 nano sysinfo.sh
-ls -al sysinfo.sh
+
+whoami
+pwd
+df -h
+
+chmod 777 sysinfo.sh
+
+/sysinfo.sh
+parkgyuseong
+/home/parkgyuseong/quests/shell_practice
+Filesystem           Size  Used Avail Use% Mounted on
+devtmpfs             4.0M     0  4.0M   0% /dev
+tmpfs                870M     0  870M   0% /dev/shm
+tmpfs                348M  7.2M  341M   3% /run
+/dev/mapper/rl-root   17G  4.8G   13G  29% /
+/dev/nvme0n1p1       960M  480M  481M  50% /boot
+tmpfs                174M  108K  174M   1% /run/user/1000
+/dev/sr0              12G   12G     0 100% /run/media/parkgyuseong/Rocky-9-6-x86_64-dvd
+
 ```
 ---
 
