@@ -70,7 +70,8 @@
 * `company/departments/dev/` 디렉터리: 개발팀만 접근 가능, 소유자와 그룹은 읽기/쓰기/실행 가능  
 
 ```
-sudo chown -R root:developers company/departments/dev
+sudo chgrp developers ./company/departments/dev/
+
 
 sudo chmod 770 company/departments/dev
 
@@ -87,14 +88,23 @@ drwxr-xr-x. 2 root root        6 Jul 21 16:54 marketing
 * `company/departments/dev/main.py`: 개발팀은 읽기/쓰기, 기타는 읽기만 가능  
 
 ```
-sudo chmod 061 company/departments/dev/main.py 
-ls -la company/departments/dev/main.py 
-----rw---x. 1 root developers 0 Jul 21 17:32 company/departments/dev/main.py
+sudo chgrp developers company/departments/dev/main.py
+
+chmod 764 company/departments/dev/main.py 
+
+-rwxrw-r--. 1 root developers 0 Jul 21 23:44 company/departments/dev/main.py
 
 ```
 * `company/departments/dev/build.sh`: 개발팀만 실행 가능
+```
+sudo chgrp developers company/departments/dev/build.sh 
 
+sudo chmod 010 company/departments/dev/build.sh 
 
+ls -l company/departments/dev/build.sh 
+------x---. 1 root developers 20 Jul 22 01:19 company/departments/dev/build.sh
+
+```
 
 **명령어를 작성하세요:**
 
@@ -153,8 +163,44 @@ ls -la private/bob/config.json
 `shared/` 디렉터리의 권한을 다음과 같이 설정하세요:
 
 * `shared/documents/`: developers와 managers 그룹 모두 읽기 가능, 소유자만 쓰기 가능  
+
+```
+chown :developers shared/documents/
+sudo chmod 755 shared/documents/
+sudo setfacl -m g:managers:rx shared/documents/
+ls -l shared/
+total 0
+drwxr-xr-x+ 2 root developers 68 Jul 21 23:44 documents
+drwxr-xr-x. 2 root developers 58 Jul 21 23:44 resources
+drw-r--r--. 2 root developers 40 Jul 22 01:18 tools
+
+
+
+```
 * `shared/resources/`: developers 그룹만 접근 가능  
+
+```
+
+sudo chgrp developers shared/resources/
+ls -l shared/
+total 0
+drwxr-xr-x. 2 root root       68 Jul 21 23:44 documents
+drwxr-xr-x. 2 root developers 58 Jul 21 23:44 resources
+drwxr-xr-x. 2 root root       40 Jul 22 01:18 tools
+
+```
+
 * `shared/tools/`: 모든 사용자가 읽기 가능, developers 그룹만 실행 가능
+
+```
+sudo chgrp developers shared/tools/
+chmod 644 shared/tools/
+ls -l shared/
+total 0
+drwxr-xr-x. 2 root root       68 Jul 21 23:44 documents
+drwxr-xr-x. 2 root developers 58 Jul 21 23:44 resources
+drw-r--r--. 2 root developers 40 Jul 22 01:18 tools
+```
 
 **명령어를 작성하세요:**
 
@@ -168,7 +214,34 @@ ls -la private/bob/config.json
 프로젝트 디렉터리의 권한을 다음과 같이 설정하세요:
 
 * `company/projects/project_a/`: developers 그룹 구성원들이 협업할 수 있도록 설정  
+```
+sudo chgrp developers company/projects/project_a
+ls -l company/projects/
+total 0
+drwxr-xr-x. 2 root developers 55 Jul 21 23:44 project_a
+drwxr-xr-x. 2 root root       67 Jul 21 23:44 project_b
+drwxr-xr-x. 2 root root        6 Jul 21 23:43 project_c
+```
+
+
 * `company/projects/project_b/`: alice와 bob만 접근 가능하도록 설정
+```
+sudo chown alice:bob company/projects/project_b
+
+ls -l company/projects/
+total 0
+drwxr-xr-x. 2 root  developers 55 Jul 21 23:44 project_a
+drwxr-xr-x. 2 alice bob        67 Jul 21 23:44 project_b
+drwxr-xr-x. 2 root  root        6 Jul 21 23:43 project_c
+
+chmod 770 company/projects/project_b
+[root@localhost permission_practice]# ls -l company/projects/
+total 0
+drwxr-xr-x. 2 root  developers 55 Jul 21 23:44 project_a
+drwxrwx---. 2 alice bob        67 Jul 21 23:44 project_b
+drwxr-xr-x. 2 root  root        6 Jul 21 23:43 project_c
+
+```
 
 **명령어를 작성하세요:**
 
@@ -185,6 +258,9 @@ ls -la private/bob/config.json
 다음 파일들에 특수 권한을 설정하세요:
 
 * `shared/tools/deploy.sh`: SetGID 설정으로 developers 그룹 권한으로 실행  
+```
+
+```
 * `backup/` 디렉터리: Sticky Bit 설정으로 파일 소유자만 삭제 가능  
 * `company/departments/hr/salaries.txt`: SetUID 설정 (실제 환경에서는 권장하지 않지만 실습용)
 
@@ -200,8 +276,40 @@ ls -la private/bob/config.json
 다음 파일들의 권한을 숫자 표기법으로 설정하세요:
 
 * `company/departments/finance/budget.xlsx`: 소유자(rw-), 그룹(r--), 기타(---)  
+
+```
+chmod 640 company/departments/finance/budget.xlsx 
+
+ls -l company/departments/finance/
+total 0
+-rw-r-----. 1 root root 0 Jul 21 23:44 budget.xlsx
+-rw-r--r--. 1 root root 0 Jul 21 23:44 invoices.csv
+-rw-r--r--. 1 root root 0 Jul 21 23:44 reports.pdf
+
+
+```
 * `shared/documents/manual.pdf`: 소유자(rw-), 그룹(r--), 기타(r--)  
+
+```
+chmod 644 shared/documents/manual.pdf
+ls -l shared/documents/
+total 0
+-rw-r--r--. 1 root root 0 Jul 21 23:44 guidelines.txt
+-rw-r--r--. 1 root root 0 Jul 21 23:44 manual.pdf
+-rw-r--r--. 1 root root 0 Jul 21 23:44 templates.docx
+
+```
+
 * `logs/2024/06/system.log`: 소유자(rw-), 그룹(r--), 기타(---)
+```
+chmod 640 logs/2024/06/system.log 
+ls -l logs/2024/06
+total 0
+-rw-r--r--. 1 root root 0 Jul 21 23:45 access.log
+-rw-r--r--. 1 root root 0 Jul 21 23:45 debug.log
+-rw-r--r--. 1 root root 0 Jul 21 23:45 error.log
+-rw-r-----. 1 root root 0 Jul 21 23:45 system.log
+```
 
 **명령어를 작성하세요:**
 
@@ -217,10 +325,49 @@ ls -la private/bob/config.json
 
 다음과 같이 파일과 디렉터리의 소유권을 변경하세요:
 
-* `company/departments/dev/` 디렉터리와 모든 하위 파일: alice 소유, developers 그룹  
-* `company/departments/hr/` 디렉터리와 모든 하위 파일: diana 소유, managers 그룹  
-* `shared/tools/` 디렉터리와 모든 하위 파일: root 소유, developers 그룹
+* `company/departments/dev/` 디렉터리와 모든 하위 파일: alice 소유, developers 그룹 
 
+```
+sudo chown -R alice:developers company/departments/dev/
+ls -la company/departments/dev/
+total 16
+drwxrwx---. 2 alice developers 138 Jul 22 01:21 .
+drwxr-xr-x. 6 root  root        79 Jul 22 01:21 ..
+-rw-r--r--. 1 alice developers  19 Jul 22 01:21 api.conf
+-rw-r--r--. 1 alice developers  14 Jul 22 01:16 bild.sh
+------x---. 1 alice developers  20 Jul 22 01:19 build.sh
+-rw-r--r--. 1 alice developers   0 Jul 21 23:44 config.py
+-rw-r--r--. 1 alice developers  25 Jul 22 01:20 database.conf
+-rwxrw-r--. 1 alice developers   0 Jul 21 23:44 main.py
+-rw-r--r--. 1 alice developers   0 Jul 21 23:44 README.md
+-rw-r--r--. 1 alice developers   0 Jul 21 23:44 test.py
+```
+
+* `company/departments/hr/` 디렉터리와 모든 하위 파일: diana 소유, managers 그룹  
+```
+sudo chown -R diana:managers company/departments/hr
+
+ls -al company/departments/hr
+total 0
+drwxr-xr-x. 2 diana managers 69 Jul 21 23:44 .
+drwxr-xr-x. 6 root  root     79 Jul 22 01:21 ..
+-rw-r--r--. 1 diana managers  0 Jul 21 23:44 contracts.pdf
+-rw-r--r--. 1 diana managers  0 Jul 21 23:44 employees.xlsx
+-rw-r--r--. 1 diana managers  0 Jul 21 23:44 policies.txt
+
+```
+* `shared/tools/` 디렉터리와 모든 하위 파일: root 소유, developers 그룹
+```
+sudo chown -R root:developers shared/tools/
+
+ls -al shared/tools/
+total 8
+drw-r--r--. 2 root developers 40 Jul 22 01:18 .
+drwxr-xr-x. 5 root root       53 Jul 21 23:43 ..
+-rw-r--r--. 1 root developers 21 Jul 22 01:19 backup.sh
+-rw-r--r--. 1 root developers 24 Jul 22 01:18 deploy.sh
+
+```
 **명령어를 작성하세요:**
 
 - \# 4-1 답안 작성란  
@@ -233,7 +380,30 @@ ls -la private/bob/config.json
 다음 디렉터리들의 그룹만 변경하세요:
 
 * `company/projects/`: managers 그룹으로 변경  
+
+```
+sudo chgrp managers company/projects/
+s -al company/projects/
+total 0
+drwxr-xr-x. 5 root  managers   57 Jul 21 23:43 .
+drwxr-xr-x. 4 root  root       41 Jul 21 23:43 ..
+drwxr-xr-x. 2 root  developers 55 Jul 21 23:44 project_a
+drwxrwx---. 2 alice bob        67 Jul 21 23:44 project_b
+drwxr-xr-x. 2 root  root        6 Jul 21 23:43 project_c
+```
+
 * `backup/daily/`: developers 그룹으로 변경
+
+```
+sudo chgrp developers backup/daily/
+ls -al backup/daily/
+total 0
+drwxr-xr-x. 2 root developers 60 Jul 21 23:45 .
+drwxr-xr-x. 5 root root       48 Jul 21 23:43 ..
+-rw-r--r--. 1 root root        0 Jul 21 23:45 backup_20250721.tar.gz
+-rw-r--r--. 1 root root        0 Jul 21 23:45 log_20250721.txt
+
+```
 
 **명령어를 작성하세요:**
 
@@ -251,8 +421,29 @@ ls -la private/bob/config.json
 다음 스크립트 파일들의 실행 권한을 적절히 설정하세요:
 
 * `shared/tools/deploy.sh`: developers 그룹만 실행 가능  
-* `shared/tools/backup.sh`: alice와 diana만 실행 가능 (ACL 사용)  
+```
+sudo chgrp developers shared/tools/deploy.sh 
+chmod 676 shared/tools/deploy.sh
+ls -al shared/tools/deploy.sh 
+-rw-rwxrw-. 1 root developers 24 Jul 22 01:18 shared/tools/deploy.sh
+
+```
+* `shared/tools/backup.sh`: alice와 diana만 실행 가능 (ACL 사용)
+```
+sudo chown alice:diana shared/tools/backup.sh 
+chmod 654 shared/tools/backup.sh 
+ls -l shared/tools/
+total 8
+-rw-r-xr--. 1 alice diana      21 Jul 22 01:19 backup.sh
+```
 * `company/departments/dev/build.sh`: 소유자만 실행 가능
+```
+chmod 700 company/departments/dev/build.sh
+ls -al company/departments/dev/build.sh 
+-rwx------. 1 alice developers 20 Jul 22 01:19 company/departments/dev/build.sh
+
+
+```
 
 **명령어를 작성하세요:**
 
@@ -325,8 +516,29 @@ ls -la private/bob/config.json
 **명령어를 작성하세요:**
 
 - \# 10-1 답안 작성란  
--   
--   
+```
+sudo chown root:developers backup/
+ls -l 
+total 0
+drwxr-xr-x. 5 root developers 48 Jul 21 23:43 backup
+
+sudo chgrp developers backup/daily/
+chmod 740 backup/daily/
+ls -al backup/daily/
+total 0
+drwxr-----. 2 root developers 60 Jul 21 23:45 .
+
+sudo chgrp managers backup/weekly/
+chmod 040 backup/weekly/
+ls -al backup/weekly/
+total 0
+d---r-----. 2 root managers    6 Jul 21 23:43 .
+drwxr-xr-x. 5 root developers 48 Jul 21 23:43 ..
+
+
+
+```
+   
     
   ---
 
