@@ -66,25 +66,32 @@ Password:
 * **매 로그인마다 자동 생성**
 
 ```
-nano ~/.bash_profile
+nono .bash_profile
 
-mkdir ~/Downloads/auto_created/                       #/.bash_profile 스크립트
-mkdir ~/Downloads/auto_created/logs/
-touch ~/Downloads/auto_created/info.txt
-cd ~/Downloads/auto_created/logs/
-touch logs.txt
+
+mkdir -p ~/Downloads/auto_created/logs/
+echo "in" > ~/Downloads/auto_created/info.txt
+echo "lo" > ~/Downloads/auto_created/logs/log.txt
 
 su - parkgyuseong
 Password: 
 
-[parkgyuseong@localhost logs]$ cd ..
-[parkgyuseong@localhost auto_created]$ tree
+cd Downloads/
+[parkgyuseong@localhost Downloads]$ tree
 .
-├── info.txt
-└── logs
-    └── logs.txt
+└── auto_created
+    ├── info.txt
+    └── logs
+        └── log.txt
 
-1 directory, 2 files
+
+cat ./auto_created/info.txt
+in
+
+cat ./auto_created/logs/log.txt
+lo
+
+
 ```
   ---
 
