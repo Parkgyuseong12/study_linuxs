@@ -422,6 +422,12 @@ cut -d " " -f2 system.log | sort | uniq -c
 
 * \# 명령어를 작성하세요  
 ```
+sort -n ./*.txt | uniq -c | sort -n | sort -r | head -n5
+      4 banana
+      4 apple
+      3 Linux
+      2 Windows
+      2 Sara:22:Seoul:Designer
 
 
 ```
@@ -437,18 +443,41 @@ cut -d " " -f2 system.log | sort | uniq -c
 *   
 * \# 가장 많이 접속한 IP 주소를 찾으세요  
 * \# 명령어를 작성하세요
+```
+cut -d ' ' -f1 access.log | sort | uniq -c | head -n1
+      3 192.168.1.10
 
+```
 
 **12-2.** 시스템 사용자 분석
 
 * \# /etc/passwd 파일에서 실제 사용자(홈 디렉토리가 /home으로 시작)만 추출하여 사용자명 순으로 정렬하세요  
 * \# 명령어를 작성하세요
+```
+grep 'home' /etc/passwd | cut -d ":" -f1 | sort
+alice
+bob
+charlie
+diana
+eve
+parkgyuseong
 
+
+```
 
 **12-3.** 설정 파일 백업 및 비교
 
 * \# employees.txt 파일을 백업하고, 원본에서 한 줄을 수정한 후 차이점을 확인하세요  
 * \# 명령어들을 순서대로 작성하세요  
-    
-  ---
+```
+cat employees.txt 1>employeesbackup.txt
+nano employees.txt
+diff employees.txt employeesbackup.txt
+1c1
+< park:13:seoul:baby
+---
+> John:25:Seoul:Engineer
+
+
+```
 
