@@ -69,6 +69,21 @@
 
 * `company/departments/dev/` 디렉터리: 개발팀만 접근 가능, 소유자와 그룹은 읽기/쓰기/실행 가능  
 
+
+
+
+* `company/departments/dev/main.py`: 개발팀은 읽기/쓰기, 기타는 읽기만 가능  
+
+
+
+
+* `company/departments/dev/build.sh`: 개발팀만 실행 가능
+
+
+
+**명령어를 작성하세요:**
+
+- \# 1-1 답안 작성란  
 ```
 sudo chgrp developers ./company/departments/dev/
 
@@ -84,19 +99,12 @@ drwxr-xr-x. 2 root root       64 Jul 21 16:55 finance
 drwxr-xr-x. 2 root root       69 Jul 21 16:55 hr
 drwxr-xr-x. 2 root root        6 Jul 21 16:54 marketing
 
-```
-* `company/departments/dev/main.py`: 개발팀은 읽기/쓰기, 기타는 읽기만 가능  
-
-```
 sudo chgrp developers company/departments/dev/main.py
 
 chmod 764 company/departments/dev/main.py 
 
 -rwxrw-r--. 1 root developers 0 Jul 21 23:44 company/departments/dev/main.py
 
-```
-* `company/departments/dev/build.sh`: 개발팀만 실행 가능
-```
 sudo chgrp developers company/departments/dev/build.sh 
 
 sudo chmod 010 company/departments/dev/build.sh 
@@ -106,18 +114,27 @@ ls -l company/departments/dev/build.sh
 
 ```
 
-**명령어를 작성하세요:**
-
-- \# 1-1 답안 작성란  
--   
-- 
-
 
   ### **1-2. 개인 디렉터리 보안 설정**
 
 각 사용자의 개인 디렉터리와 파일을 다음과 같이 설정하세요:
 
 * `private/alice/` 디렉터리: alice만 접근 가능  
+
+
+* `private/alice/personal.txt`: alice만 읽기/쓰기 가능  
+
+
+
+* `private/bob/config.json`: bob만 읽기/쓰기 가능
+
+
+
+
+**명령어를 작성하세요:**
+
+- \# 1-2 답안 작성란  
+
 ```
 sudo chown alice private/alice
 sudo chmod 700 private/alice/
@@ -128,31 +145,18 @@ drwxr-xr-x. 7 root  root 69 Jul 21 16:54 ..
 -rw-r--r--. 1 root  root  0 Jul 21 16:56 backup.tar
 -rw-r--r--. 1 root  root  0 Jul 21 16:56 personal.txt
 -rw-r--r--. 1 root  root  0 Jul 21 16:56 settings.conf
-```
 
-* `private/alice/personal.txt`: alice만 읽기/쓰기 가능  
-```
 sudo chown alice private/alice/personal.txt 
 sudo chmod 600 private/alice/personal.txt 
 ls -la private/alice/personal.txt 
 -rw-------. 1 alice root 0 Jul 21 16:56 private/alice/personal.txt
-```
 
-* `private/bob/config.json`: bob만 읽기/쓰기 가능
-
-```
 sudo chown bob private/bob/config.json 
 sudo chmod 600 private/bob/config.json 
 ls -la private/bob/config.json 
 -rw-------. 1 bob root 0 Jul 21 16:56 private/bob/config.json
 
 ```
-
-**명령어를 작성하세요:**
-
-- \# 1-2 답안 작성란  
--   
--   
     
   ---
 
@@ -164,6 +168,27 @@ ls -la private/bob/config.json
 
 * `shared/documents/`: developers와 managers 그룹 모두 읽기 가능, 소유자만 쓰기 가능  
 
+
+
+
+
+
+* `shared/resources/`: developers 그룹만 접근 가능  
+
+
+
+
+
+
+* `shared/tools/`: 모든 사용자가 읽기 가능, developers 그룹만 실행 가능
+
+
+
+
+**명령어를 작성하세요:**
+
+- \# 2-1 답안 작성란  
+
 ```
 chown :developers shared/documents/
 sudo chmod 755 shared/documents/
@@ -174,13 +199,6 @@ drwxr-xr-x+ 2 root developers 68 Jul 21 23:44 documents
 drwxr-xr-x. 2 root developers 58 Jul 21 23:44 resources
 drw-r--r--. 2 root developers 40 Jul 22 01:18 tools
 
-
-
-```
-* `shared/resources/`: developers 그룹만 접근 가능  
-
-```
-
 sudo chgrp developers shared/resources/
 ls -l shared/
 total 0
@@ -188,11 +206,6 @@ drwxr-xr-x. 2 root root       68 Jul 21 23:44 documents
 drwxr-xr-x. 2 root developers 58 Jul 21 23:44 resources
 drwxr-xr-x. 2 root root       40 Jul 22 01:18 tools
 
-```
-
-* `shared/tools/`: 모든 사용자가 읽기 가능, developers 그룹만 실행 가능
-
-```
 sudo chgrp developers shared/tools/
 chmod 644 shared/tools/
 ls -l shared/
@@ -202,18 +215,21 @@ drwxr-xr-x. 2 root developers 58 Jul 21 23:44 resources
 drw-r--r--. 2 root developers 40 Jul 22 01:18 tools
 ```
 
-**명령어를 작성하세요:**
-
-- \# 2-1 답안 작성란  
--   
-- 
-
 
   ### **2-2. 프로젝트별 협업 권한**
 
 프로젝트 디렉터리의 권한을 다음과 같이 설정하세요:
 
 * `company/projects/project_a/`: developers 그룹 구성원들이 협업할 수 있도록 설정  
+
+
+* `company/projects/project_b/`: alice와 bob만 접근 가능하도록 설정
+
+
+**명령어를 작성하세요:**
+
+- \# 2-2 답안 작성란  
+
 ```
 sudo chgrp developers company/projects/project_a
 ls -l company/projects/
@@ -221,11 +237,7 @@ total 0
 drwxr-xr-x. 2 root developers 55 Jul 21 23:44 project_a
 drwxr-xr-x. 2 root root       67 Jul 21 23:44 project_b
 drwxr-xr-x. 2 root root        6 Jul 21 23:43 project_c
-```
 
-
-* `company/projects/project_b/`: alice와 bob만 접근 가능하도록 설정
-```
 sudo chown alice:bob company/projects/project_b
 
 ls -l company/projects/
@@ -243,11 +255,6 @@ drwxr-xr-x. 2 root  root        6 Jul 21 23:43 project_c
 
 ```
 
-**명령어를 작성하세요:**
-
-- \# 2-2 답안 작성란  
--   
--   
     
   ---
 
