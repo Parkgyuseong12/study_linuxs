@@ -277,6 +277,18 @@ drwxr-xr-x. 2 root  root        6 Jul 21 23:43 project_c
 
 * `company/departments/finance/budget.xlsx`: 소유자(rw-), 그룹(r--), 기타(---)  
 
+
+* `shared/documents/manual.pdf`: 소유자(rw-), 그룹(r--), 기타(r--)  
+
+
+
+
+* `logs/2024/06/system.log`: 소유자(rw-), 그룹(r--), 기타(---)
+
+
+**명령어를 작성하세요:**
+
+- \# 3-2 답안 작성란  
 ```
 chmod 640 company/departments/finance/budget.xlsx 
 
@@ -286,11 +298,6 @@ total 0
 -rw-r--r--. 1 root root 0 Jul 21 23:44 invoices.csv
 -rw-r--r--. 1 root root 0 Jul 21 23:44 reports.pdf
 
-
-```
-* `shared/documents/manual.pdf`: 소유자(rw-), 그룹(r--), 기타(r--)  
-
-```
 chmod 644 shared/documents/manual.pdf
 ls -l shared/documents/
 total 0
@@ -298,10 +305,6 @@ total 0
 -rw-r--r--. 1 root root 0 Jul 21 23:44 manual.pdf
 -rw-r--r--. 1 root root 0 Jul 21 23:44 templates.docx
 
-```
-
-* `logs/2024/06/system.log`: 소유자(rw-), 그룹(r--), 기타(---)
-```
 chmod 640 logs/2024/06/system.log 
 ls -l logs/2024/06
 total 0
@@ -309,13 +312,7 @@ total 0
 -rw-r--r--. 1 root root 0 Jul 21 23:45 debug.log
 -rw-r--r--. 1 root root 0 Jul 21 23:45 error.log
 -rw-r-----. 1 root root 0 Jul 21 23:45 system.log
-```
 
-**명령어를 작성하세요:**
-
-- \# 3-2 답안 작성란  
--   
--   
     
   ---
 
@@ -325,8 +322,22 @@ total 0
 
 다음과 같이 파일과 디렉터리의 소유권을 변경하세요:
 
-* `company/departments/dev/` 디렉터리와 모든 하위 파일: alice 소유, developers 그룹 
+* company/departments/dev/` 디렉터리와 모든 하위 파일: alice 소유, developers 그룹 
 
+
+
+
+* `company/departments/hr/` 디렉터리와 모든 하위 파일: diana 소유, managers 그룹  
+
+
+
+
+* `shared/tools/` 디렉터리와 모든 하위 파일: root 소유, developers 그룹
+
+
+**명령어를 작성하세요:**
+
+- \# 4-1 답안 작성란  
 ```
 sudo chown -R alice:developers company/departments/dev/
 ls -la company/departments/dev/
@@ -341,10 +352,7 @@ drwxr-xr-x. 6 root  root        79 Jul 22 01:21 ..
 -rwxrw-r--. 1 alice developers   0 Jul 21 23:44 main.py
 -rw-r--r--. 1 alice developers   0 Jul 21 23:44 README.md
 -rw-r--r--. 1 alice developers   0 Jul 21 23:44 test.py
-```
 
-* `company/departments/hr/` 디렉터리와 모든 하위 파일: diana 소유, managers 그룹  
-```
 sudo chown -R diana:managers company/departments/hr
 
 ls -al company/departments/hr
@@ -355,9 +363,6 @@ drwxr-xr-x. 6 root  root     79 Jul 22 01:21 ..
 -rw-r--r--. 1 diana managers  0 Jul 21 23:44 employees.xlsx
 -rw-r--r--. 1 diana managers  0 Jul 21 23:44 policies.txt
 
-```
-* `shared/tools/` 디렉터리와 모든 하위 파일: root 소유, developers 그룹
-```
 sudo chown -R root:developers shared/tools/
 
 ls -al shared/tools/
@@ -368,11 +373,6 @@ drwxr-xr-x. 5 root root       53 Jul 21 23:43 ..
 -rw-r--r--. 1 root developers 24 Jul 22 01:18 deploy.sh
 
 ```
-**명령어를 작성하세요:**
-
-- \# 4-1 답안 작성란  
--   
-- 
 
 
   ### **4-2. 그룹 전용 변경**
