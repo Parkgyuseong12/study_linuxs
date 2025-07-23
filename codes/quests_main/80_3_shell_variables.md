@@ -175,6 +175,38 @@ Enter input file: article.txt
 Unique words saved to: article\_unique.txt
 
 ---
+```
+[parkgyuseong@localhost env]$ nano unique_words.sh
+
+read -p "Enter input file : " filename
+cat "$filename" | tr " " "\n" | sort | uniq > "$filename"_unique.txt 
+echo "Unique words saved to :  "$filename"_unique.txt" 
+
+[parkgyuseong@localhost env]$ bash unique_words.sh
+Enter input file : article.txt
+Unique words saved to :  article.txt_unique.txt
+
+[parkgyuseong@localhost env]$ cat article.txt_unique.txt 
+an
+and
+automation.
+developers
+embedded
+for
+is
+Linux
+Many
+open-source
+operating
+popular
+programming
+servers
+system.
+systems.
+use
+
+```
+
 
 ### **✅ \[문제 4\] 두 파일의 마지막 줄 비교**
 
@@ -197,6 +229,23 @@ bash compare\_lastline.sh file1.txt file2.txt
 Result: Different
 
 ---
+```
+nano compare_lastline.sh
+
+filename="$1"
+filename2="$2"
+
+tail -n1 "$filename" > last1.txt
+tail -n1 "$filename2" > last2.txt
+
+diff last1.txt last2.txt > /dev/null && echo "same" || echo "different"
+
+[parkgyuseong@localhost env]$ bash compare_lastline.sh file1.txt file2.txt
+different
+```
+
+
+```
 
 ### **✅ \[문제 5\] 이메일 리스트 정제 및 카운트**
 
