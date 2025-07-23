@@ -22,7 +22,8 @@
 
   ### **📄 파일명 예시**
 
-`create_file.sh`
+```80_1_shell_variables_aguments.sh```
+
 
 ---
 
