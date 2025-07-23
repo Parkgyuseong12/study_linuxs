@@ -6,7 +6,9 @@
 name="$1"
 read -p "read input : " read1
 echo "input value :" "$1" "$read1"
+```
 
+```
 [parkgyuseong@localhost quests]$ source 80_2_shell_variables_read.sh agument_first
 read input : read_first
 input value : agument_first read_first
