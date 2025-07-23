@@ -76,4 +76,8 @@ echo "$filename" 파일이 성공적으로 생성되었습니다.
 ```
 [parkgyuseong@localhost quests]$ source ./80_1_shell_variables_aguments.sh welcome.txt "Hello Linux Learners"
 welcome.txt 파일이 성공적으로 생성되었습니다.
+
+[parkgyuseong@localhost quests]$ cat welcome.txt 
+Hello Linux Learners
+
 ```
