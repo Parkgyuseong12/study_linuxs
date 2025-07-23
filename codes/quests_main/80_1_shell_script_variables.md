@@ -22,8 +22,7 @@
 
   ### **📄 파일명 예시**
 
-```80_1_shell_variables_aguments.sh```
-
+`80_1_shell_variables_aguments.sh`
 
 ---
 
@@ -41,8 +40,7 @@
 
    ### **✅ 실행 예제**
 
- $ ./80_1_shell_variables_aguments.sh welcome.txt "Hello Linux Learners!"
-
+   $ ./80\_1\_shell\_variables\_aguments.sh welcome.txt "Hello Linux Learners\!"  
    
 
    #### **📂 결과**
@@ -59,11 +57,7 @@
     
   ---
 
-  ### **💡 힌트**
-
-* `$1`, `$2`를 사용하여 외부 인자를 받을 수 있습니다.
-
-```
+  ```
 [parkgyuseong@localhost quests]$ nano 80_1_shell_variables_aguments.sh 
 
 filename="$1"
@@ -72,13 +66,15 @@ filename2="$2"
 touch "$filename"
 echo "$filename2" > "$filename"
 echo "$filename" 파일이 성공적으로 생성되었습니다. 
-```
-### 출력화면
-```
+
 [parkgyuseong@localhost quests]$ source ./80_1_shell_variables_aguments.sh welcome.txt "Hello Linux Learners"
 welcome.txt 파일이 성공적으로 생성되었습니다.
 
 [parkgyuseong@localhost quests]$ cat welcome.txt 
 Hello Linux Learners
 
-```
+  ```
+
+  ### **💡 힌트**
+
+* `$1`, `$2`를 사용하여 외부 인자를 받을 수 있습니다.
