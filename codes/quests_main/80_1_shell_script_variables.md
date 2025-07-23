@@ -57,7 +57,7 @@
     
   ---
 
-  ```
+```
 [parkgyuseong@localhost quests]$ nano 80_1_shell_variables_aguments.sh 
 
 filename="$1"
@@ -73,7 +73,7 @@ welcome.txt 파일이 성공적으로 생성되었습니다.
 [parkgyuseong@localhost quests]$ cat welcome.txt 
 Hello Linux Learners
 
-  ```
+```
 
   ### **💡 힌트**
 
